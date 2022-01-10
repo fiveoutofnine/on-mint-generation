@@ -6,7 +6,7 @@ import "ds-test/test.sol";
 import { OnMintGeneration } from "../OnMintGeneration.sol";
 
 contract ERC721WithOnMintGenerationTest is DSTest {
-    /* uint256 public constant TRAIT_1_CPW = 0xFFDEBD9D7E60402007;
+    uint256 public constant TRAIT_1_CPW = 0xFFDEBD9D7E60402007;
     uint256 public constant TRAIT_2_CPW = 0x00FDF5EBE9D9D8D1C5B8B4A7938E8A68584E2B1F12;
     uint256 public constant TRAIT_3_CPW = 0xFDF4E8E0DBD4D0CCC9C6C4C2BBB2AEABA19793897F77726B5B58524C4A463E1E;
     uint256 public constant TRAIT_4_CPW = 0xFFFAF5EBE6DEDAD2CFC3BBB6AFAAA8A399918D877F787569686158534B45431E;
@@ -57,5 +57,5 @@ contract ERC721WithOnMintGenerationTest is DSTest {
             | OnMintGeneration.selectRandomTrait(TRAIT_5_CPW, seed >> 0x20) << 10
             | OnMintGeneration.selectRandomTrait(TRAIT_6_CPW, seed >> 0x28) << 5
             | OnMintGeneration.selectRandomTrait(TRAIT_7_CPW, seed >> 0x30);
-    } */
+    }
 }
