@@ -101,11 +101,10 @@ contract ERC721WithOnMintGeneration is ERC721 {
     uint256 public constant TRAIT_7_CPW 
         = 0xFFEAD4C9BDB7B306;
 
-    mapping(uint256 => uint256) metadata;
-    mapping(uint256 => bool) metadataSeen;
+    mapping(uint256 => uint256) public metadata;
+    mapping(uint256 => bool) private metadataSeen;
 
-    // Saves ~15_000 gas for the first mint because setting a nonzero slot in storage costs more.
-    uint256 public totalSupply = 1;
+    uint256 public totalSupply;
 
     constructor() ERC721("OnMintGeneration", "OMG") {/* 😱 */}
 
@@ -125,17 +124,11 @@ contract ERC721WithOnMintGeneration is ERC721 {
         // 2nd duplicate check.
         if (metadataSeen[tokenMetadata]) { tokenMetadata = generateMetadata(2); }
 
-        // Same as `metadata[tokenId / 7] = (metadata[tokenId / 7] << 35) | tokenMetadata`
         // Note that, because every `uint256` returned by `generateMetadata` has at most 35 bits,
         // we can bitpack 7 of them (`35 * 7 = 245 < 256`) into 1 `uint256`. This is worthwhile
         // because setting a nonzero slot in storage requires 20_000 gas, whereas it only costs
         // 5_000 gas otherwise. i.e., storing the metadata is ~15_000 gas cheaper 6 out of 7 times.
-        assembly {
-            mstore(0, 7)
-            mstore(0x20, div(tokenId, 7))
-            let hash := keccak256(0, 0x40)
-            sstore(hash, or(shr(sload(hash), 35), tokenMetadata))
-        }
+        metadata[tokenId / 7] = (metadata[tokenId / 7] << 35) | tokenMetadata;
         metadataSeen[tokenMetadata] = true;
     }
 
@@ -151,12 +144,21 @@ contract ERC721WithOnMintGeneration is ERC721 {
     }
 
     function tokenURI(uint256 _tokenId) public view virtual override returns (string memory) {
-        uint256 tokenMetadata = metadata[_tokenId];
+        require(ownerOf[_tokenId] != address(0));
+
+        uint256 tokenMetadata = metadata[_tokenId / 7];
+        uint256 numMinted = totalSupply - 1;
+        if ((numMinted - (numMinted % 7)) > _tokenId) {
+            tokenMetadata >>= (35 * (6 - (_tokenId % 7)));
+        } else {
+            tokenMetadata >>= (35 * ((numMinted % 7) - (_tokenId % 7)));
+        }
+        tokenMetadata &= 0x7FFFFFFFF;
 
         return string(
             abi.encodePacked(
                 '{"trait_one":"',
-                Strings.toString(tokenMetadata >> 35),
+                Strings.toString(tokenMetadata >> 30),
                 '","trait_two":"',
                 Strings.toString((tokenMetadata >> 25) & 0x1F),
                 '","trait_three":"',

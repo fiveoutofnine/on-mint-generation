@@ -10,18 +10,18 @@ Note that code written for this example has not been audited.
 compiling...
 success.
 Running 1 test for "ERC721WithOnMintGenerationTest.json":ERC721WithOnMintGenerationTest
-[PASS] testMint() (gas: 65758)
+[PASS] testMint() (gas: 66211)
 
 Running 9 tests for ERC721WithOnMintGenerationTest
-[PASS] testGenerateRandomMetadata(uint256) (μ: 9192, ~: 9196)
+[PASS] testGenerateRandomMetadata(uint256) (μ: 9201, ~: 9198)
 [PASS] testGenerateRandomNumber(uint256) (μ: 2295, ~: 2297)
-[PASS] testTrait1Cpw(uint256) (μ: 1873, ~: 1860)
-[PASS] testTrait2Cpw(uint256) (μ: 1970, ~: 1960)
-[PASS] testTrait3Cpw(uint256) (μ: 2161, ~: 2176)
-[PASS] testTrait4Cpw(uint256) (μ: 2121, ~: 2131)
-[PASS] testTrait5Cpw(uint256) (μ: 2050, ~: 2086)
-[PASS] testTrait6Cpw(uint256) (μ: 2148, ~: 2155)
-[PASS] testTrait7Cpw(uint256) (μ: 1769, ~: 1771)
+[PASS] testTrait1Cpw(uint256) (μ: 1879, ~: 1860)
+[PASS] testTrait2Cpw(uint256) (μ: 1972, ~: 1960)
+[PASS] testTrait3Cpw(uint256) (μ: 2158, ~: 2174)
+[PASS] testTrait4Cpw(uint256) (μ: 2118, ~: 2131)
+[PASS] testTrait5Cpw(uint256) (μ: 2045, ~: 2052)
+[PASS] testTrait6Cpw(uint256) (μ: 2145, ~: 2155)
+[PASS] testTrait7Cpw(uint256) (μ: 1768, ~: 1771)
 ```
 Note that minting will cost ~15,000 gas more if it is an address's first mint, and ~15,000 gas more
 1 out of 7 times. In practice, it should cost around 80,000 ~ 110,000 gas to mint a token with
