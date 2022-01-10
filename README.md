@@ -6,7 +6,7 @@ Note that code written for this example has not been audited.
 
 # Gas Usage
 ```
-forge test --optimize-runs 0
+>>> forge test --optimize-runs 0
 compiling...
 success.
 Running 1 test for "ERC721WithOnMintGenerationTest.json":ERC721WithOnMintGenerationTest
@@ -49,6 +49,19 @@ more is desired, work-arounds are possible by splitting up a property's cumulati
 weightings into more than just 1 `uint256`. See
 [`{OnMintGeneration-selectRandomTrait}`](https://github.com/fiveoutofnine/on-mint-generation/blob/c65474d33f1477cae8245109c9eeb60b1bfe936b/src/OnMintGeneration.sol#L19)
 for an explanation.
+
+# Using the algorithm
+Read through
+[ERC721WithOnMintGeneration.sol](https://github.com/fiveoutofnine/on-mint-generation/blob/main/src/ERC721WithOnMintGeneration.sol)
+and
+[OnMintGeneration.sol](https://github.com/fiveoutofnine/on-mint-generation/blob/main/src/OnMintGeneration.sol)
+to understand how the algorithm is implemented first. Then, consider utilizing
+[py_utils](https://github.com/fiveoutofnine/on-mint-generation/blob/main/py_utils)
+to help:
+```py
+>>> python3 py_utils/generate_cpws.py
+['0xffdebd9d7e60402007', '0xfdf5ebe9d9d8d1c5b8b4a7938e8a68584e2b1f12', '0xfdf4e8e0dbd4d0ccc9c6c4c2bbb2aeaba19793897f77726b5b58524c4a463e1e', '0xfffaf5ebe6dedad2cfc3bbb6afaaa8a399918d877f787569686158534b45431e', '0xfff7f1e3dac7c1b3aaa8a29e948c897f736135341e170c16', '0xfff8f4ebe5dfd8d0cdcbc9b6a8a2a19e9d9b9a8e8b89605f5b59575643403d1e', '0xffead4c9bdb7b306']
+```
 
 # Credits
 - [@rari-capital/solmate](https://github.com/Rari-Capital/solmate) for an efficient implementation

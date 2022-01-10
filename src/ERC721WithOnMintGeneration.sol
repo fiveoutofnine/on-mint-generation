@@ -2,7 +2,7 @@
 pragma solidity >0.8.0;
 
 import "./tokens/ERC721.sol";
-// import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 import { OnMintGeneration } from "./OnMintGeneration.sol";
 
@@ -151,7 +151,7 @@ contract ERC721WithOnMintGeneration is ERC721 {
     }
 
     function tokenURI(uint256 _tokenId) public pure virtual override returns (string memory) {
-        /* uint256 tokenMetadata = metadata[_tokenId];
+        uint256 tokenMetadata = metadata[_tokenId];
 
         return string(
             abi.encodePacked(
@@ -171,6 +171,6 @@ contract ERC721WithOnMintGeneration is ERC721 {
                 Strings.toString(tokenMetadata & 0x1F),
                 '"}'
             )
-        ); */
+        );
     }
 }
