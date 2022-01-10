@@ -150,7 +150,7 @@ contract ERC721WithOnMintGeneration is ERC721 {
             | OnMintGeneration.selectRandomTrait(TRAIT_7_CPW, seed >> 48);
     }
 
-    function tokenURI(uint256 _tokenId) public pure virtual override returns (string memory) {
+    function tokenURI(uint256 _tokenId) public view virtual override returns (string memory) {
         uint256 tokenMetadata = metadata[_tokenId];
 
         return string(
