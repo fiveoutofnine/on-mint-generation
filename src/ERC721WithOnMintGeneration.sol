@@ -2,7 +2,7 @@
 pragma solidity >0.8.0;
 
 import "./tokens/ERC721.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
+import "openzeppelin-contracts/utils/Strings.sol";
 
 import { OnMintGeneration } from "./OnMintGeneration.sol";
 
